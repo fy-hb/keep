@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keep运动截图生成</title>
+    <style>
+        @font-face {
+            font-family: 'keeprun';
+            src: url(./DINCond-Bold.otf);
+        }
+        html,
+        body {
+            width: 100%;
+            position: relative;
+            background-color: #fff;
+        }
+        image {
+            max-width: none;
+            max-height: none;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style: none;
+        }
+        hr {
+            margin-top: 3px;
+            margin-bottom: 3px;
+            border: 0;
+            border-top: 1px solid rgba(3, 137, 87, .5);
+            box-sizing: content-box;
+            height: 0;
+            overflow: visible;
+            display: block;
+            unicode-bidi: isolate;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+        }
+        #main-div {
+            margin-top: 0px;
+            max-width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-around;
+        }
+        #main-div .new-img {
+            width: 360px;
+            height: 719px;
+            position: relative;
+        }
+        .new-img #gui-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 360px;
+            height: 719px;
+            vertical-align: top;
+        }
+        .new-img .bgimgwrap {
+            width: 360px;
+            height: 719px;
+            position: absolute;
+            display: flex;
+            overflow: hidden;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .new-img .innerbgimg {
+            width: 360px;
+            height: 719px;
+			margin: 0 auto;
+            display: flex;
+        }
+        .new-img .portrait-wrap {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            display: flex;
+            overflow: hidden;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            top: 335px;
+            left: 284px;
+            border-radius: 20px;
+        }
+        .new-img .portrait {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            display: block;
+        }
+        .new-img .weather-imgwrap {
+            height: 14px;
+            width: 14px;
+            top: 426.5px;
+            left: 238px;
+            position: absolute;
+            display: flex;
+            overflow: hidden;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .new-img .weather {
+            width: 14px;
+            height: 14px;
+            margin: 0 auto;
+            display: block;
+        }
+        .new-img span {
+            position: absolute;
+        }
+        .username {
+            top: 385px;
+            right: 34px;
+            font-size: 13px;
+        }
+        .keep-title {
+            top: 361px;
+            left: 30px;
+            line-height: 16px;
+            color: #a2a2a2;
+            font-size: 12px;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        }
+        .mile {
+            color: #57525d;
+            font-family: 'keeprun';
+            top: 387px;
+            left: 32px;
+        }
+        .mile .mile-data {
+            font-size: 50px;
+            transform: scale(1, 0.85);
+            transform-origin: 0 0;
+            margin: 0 auto;
+            letter-spacing: -1px;
+            display: inline-block;
+            position: relative;
+        }
+        .mile .gongli {
+            color: #57525d;
+            font-size: 10.67px;
+            font-family: 'keeprun';
+            margin-left: 5px;
+            bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+        .datetime {
+            color: #a2a2a2;
+            font-size: 13px;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        }
+        .date {
+            top: 407px;
+            left: 222px;
+        }
+        .time {
+            top: 407px;
+            left: 296px;
+        }
+        .env {
+            color: #a2a2a2;
+            font-size: 13px;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+            letter-spacing: -0.5px;
+        }
+        .temperature {
+            top: 424px;
+            left: 252px;
+        }
+        .humidity {
+            top: 424px;
+            left: 303px;
+        }
+        .speed-time {
+            color: #58505b;
+            font-size: 28px;
+            font-family: 'keeprun';
+            transform: scale(1, 0.85);
+        }
+        .speed {
+            top: 480px;
+            left: 32px;
+            letter-spacing: -0.5px;
+        }
+        .cost-time {
+            top: 480px;
+            left: 140px;
+            letter-spacing: -0.5px;
+        }
+        .calorie {
+            top: 480px;
+            right: 32px;
+        }
+        .set-data {
+            width: 360px;
+            font-size: 1rem;
+        }
+        input {
+            width: 55px;
+            height: 24px;
+            padding-left: 5px;
+            border-radius: 5px;
+            border: 1px solid #038957;
+            vertical-align: middle;
+            font-size: 15px;
+        }
+         :focus-visible {
+            outline: #15b77b auto 1px;
+        }
+        .username-inp {
+            width: 125px;
+        }
+        .keep-title-inp {
+            width: 125px;
+        }
+        .time-inp {
+            width: 20px;
+            margin-left: 1px;
+            margin-right: 1px;
+        }
+        .year-inp {
+            width: 40px;
+        }
+        button {
+            width: 80px;
+            height: 30px;
+            background-color: #24c68a;
+            color: #fff;
+            border-radius: 9px;
+            line-height: 16px;
+            border: 2px solid #c5e4a4;
+            font-size: 15px;
+        }
+        .large-btn {
+            width: 180px;
+            height: 50px;
+            border-radius: 26px;
+            line-height: 36px;
+            font-size: 20px;
+        }
+        .init-btn {
+            background-color: #c6c6c6;
+        }
+        .set-data h4,
+        .set-data h5 {
+            font-size: 24px;
+            font-weight: normal;
+            color: #24c68a;
+        }
+        .setDataList li {
+            margin-top: 7.5px;
+            margin-bottom: 7.5px;
+            margin-inline-start: 0.5rem;
+        }
+        .setDataList label {
+            color: #24c68a;
+        }
+        select {
+            width: 80px;
+            height: 30px;
+            background-color: #24c68a;
+            color: #fff;
+            border-radius: 9px;
+            line-height: 16px;
+            border: 2px solid #c5e4a4;
+            font-size: 15px;
+        }
+        .guijiSelect {
+            display: none;
+        }
+        .warning {
+            font-size: 20px;
+            padding: 1rem 0 0 0;
+        }
+        .explanation {
+            color: #666;
+            padding: 1rem 0 0 0;
+            font-size: 15px;
+        }
+        .explanation a {
+            text-decoration: underline;
+            color: #0000FF;
+        }
+        #inpt_colorchange_checkbox {
+            width: 20px;
+            height: 20px;
+            background-color: #24c68a;
+            color: #fff;
+            border-radius: 9px;
+            line-height: 16px;
+            border: 2px solid #c5e4a4;
+            font-size: 16px;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+        #drawpic_overlay {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+        }
+        .drawpic_popup {
+            background-color: #ffffff;
+            width: max-content;
+            text-align: center;
+        }
+        #drawpic_canvas_wrap {
+            background-color: #fff;
+            position: relative;
+            height: 600px;
+            width: 300px;
+            position: absolute;
+            display: flex;
+            overflow: hidden;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #drawpic_canvas_wrap2 {
+            background-color: #fff;
+            position: relative;
+            border: 2px solid #999;
+            height: 400px;
+            width: 300px;
+            display: flex;
+            overflow: hidden;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body id="body">
+    <div id="main-div">
+        <div id="new-Img" class="new-img">
+            <div class="bgimgwrap" id="bgimgwrap">
+                <img src="" class="innerbgimg" id="bg-img" />
+            </div>
+            <img src="" id="gui-img" />
+            <div class="portrait-wrap" id="portrait-wrap">
+                <img class="portrait" id="portrait" src="" />
+            </div>
+            <div class="weather-imgwrap">
+                <img src="" class="weather" id="weather" src="" />
+            </div>
+            <span class="username" id="username">UserName</span>
+            <span class="keep-title" id="keep-title">户外跑步</span>
+            <span class="mile"><span id="mile" class="mile-data">0.00</span><span class="gongli">公里</span></span>
+            <span class="datetime date" id="date">0000/00/00</span>
+            <span class="datetime time" id="time">00:00</span>
+            <span class="env temperature" id="temperature">00</span>
+            <span class="env humidity" id="humidity">00</span>
+            <span class="speed-time speed" id="speed">00'00"</span>
+            <span class="speed-time cost-time" id="cost-time">00:00:00</span>
+            <span class="speed-time calorie" id="calorie">0</span>
+        </div>
+        <div class="set-data">
+            <h4>数据设置</h4>
+            <ul class="setDataList">
+                <hr />
+                <li>
+                    <label>用户名：</label>
+                    <input id="inpt_username" onchange="setData()" type="text" class="username-inp">
+                </li>
+                <li>
+                    <label>头像：</label>
+                    <button onclick="inpt_portrait_onClick()" class="inpt-btn">选择图片</button>
+                    <input style="display:none;" type="file" accept="image/*" id="inpt_portrait" onchange="portrait_inpt()" />
+                    <button onclick="init_portrait()" class="init-btn">恢复默认</button>
+                </li>
+                <li>
+                    <label>标题：</label>
+                    <span>keep•</span>
+                    <input id="inpt_keep_title" onchange="setData()" type="text" class="keep-title-inp">
+                </li>
+                <hr />
+                <li>
+                    <label>公里：</label>
+                    <input type="number" min="0" max="20" id="inpt_miles" onchange="setData()" class="mile2-inp">
+                </li>
+                <li>
+                    <label>配速：</label>
+                    <input id="inpt_speeds" onchange="setData()" type="text">
+                </li>
+                <li>
+                    <label>时间：</label>
+                    <input id="inpt_year" onchange="setData()" type="text" class="time-inp year-inp">
+                    <span>年</span>
+                    <input id="inpt_month" onchange="setData()" type="text" class="time-inp">
+                    <span>月</span>
+                    <input id="inpt_day" onchange="setData()" type="text" class="time-inp">
+                    <span>日</span>
+                    <input id="inpt_hour" onchange="setData()" type="text" class="time-inp">
+                    <span>时</span>
+                    <input id="inpt_min" onchange="setData()" type="text" class="time-inp">
+                    <span>分</span>
+                </li>
+                <li>
+                    <label>天气：</label>
+                    <select onchange="weather_Select_onChange()" id="weather_Select">
+                        <option value="images/weather1.png">晴</option>
+                        <option value="images/weather2.png">多云</option>
+                        <option value="images/weather3.png">阴天</option>
+                    </select>
+                </li>
+                <li>
+                    <label>温度：</label>
+                    <input id="inpt_temperature" onchange="setData()" type="text">
+                </li>
+                <li>
+                    <label>湿度：</label>
+                    <input id="inpt_humidity" onchange="setData()" type="text">
+                </li>
+                <hr />
+                <li>
+                    <label>背景：</label>
+                    <select onchange="default_bgImgSelect_onChange()" id="default_bgImgSelect">
+                        <option value="guiji_Select_1">南体育场</option>
+                        <option value="guiji_Select_2">军工操场</option>
+                        <option value="guiji_Select_3">北体育场</option>
+                    </select>
+                </li>
+                <li>
+                    <label>自定义背景：</label>
+                    <button onclick="inpt_bgimg_onClick()">选择图片</button>
+                    <input style="display:none;" type="file" accept="image/*" id="inpt_bgimg" onchange="bgimg_inpt()" />
+                    <button onclick="init_bgimg()" class="init-btn">恢复默认</button>
+                </li>
+                <li>
+                    <label>预设轨迹：</label>
+                    <select onchange="guijiSelect_onChange()" id="guiji_Select_1" class="guijiSelect">
+                        <option value="['images/bg1_1.png', 'images/bg1_empty2.png']">预设1</option>
+                        <option value="['images/bg1_2.png', 'images/bg1_empty2.png']">预设2</option>
+                        <option value="['images/bg1_3.png', 'images/bg1_empty2.png']">预设3</option>
+                        <option value="['images/bg1_4.png', 'images/bg1_empty2.png']">预设4</option>
+                        <option value="['images/bg1_5.png', 'images/bg1_empty2.png']">预设5</option>
+                        <option value="['images/bg1_empty2.png', 'images/bg1_empty2.png']">空</option>
+                    </select>
+                    <select onchange="guijiSelect_onChange()" id="guiji_Select_2" class="guijiSelect">
+                        <option value="['images/bg2_empty.png', 'images/bg2_empty.png']">空</option>
+                    </select>
+                    <select onchange="guijiSelect_onChange()" id="guiji_Select_3" class="guijiSelect">
+                        <option value="['images/bg3_empty.png', 'images/bg3_empty.png']">空</option>
+                    </select>
+                </li>
+                <li>
+                    <label>绘制轨迹：</label>
+                    <button onclick="inpt_drawbtn_onClick()">点击绘制</button>
+                </li>
+                <li>
+                    <label>路径变色：</label>
+                    <input type="checkbox" id="inpt_colorchange_checkbox" onchange="inpt_colorchange_checkbox_onchange()" /><span>启用</span>
+                </li>
+                <li id="bs_prop_inpt_wrap">
+                    <label>变色概率：</label>
+                    <input id="inpt_bs_prob" onchange="setData()" type="text">
+                </li>
+                <li id="inpt_bs_range_wrap">
+                    <label>变色步长范围：</label>
+                    <input id="inpt_bs_range_min" onchange="setData()" type="text">
+                    <span>~</span>
+                    <input id="inpt_bs_range_max" onchange="setData()" type="text">
+                </li>
+                <hr />
+                <li>
+                    <label>图片宽度：</label>
+                    <input id="inpt_savePic_width" onchange="setData()" type="text">
+                </li>
+                <li>
+                    <button onclick="Download(Download1)" class="large-btn">保存图片</button>
+                </li>
+                <li>
+                    <button onclick="Download(Download2)">查看图片</button>
+                </li>
+                <li>
+                    <button onclick="Download(Download3)">保存图片</button>
+                    <span>(备用方案)</span>
+                </li>
+                <li>
+                    <button onclick="Download(Download4)">保存图片</button>
+                    <span>(备用方案2, 请手动重命名下载文件)</span>
+                </li>
+            </ul>
+            <div id="drawpic_overlay">
+                <div class="drawpic_popup">
+                    <div><h5>绘制轨迹</h5></div>
+                        <div id="drawpic_canvas_wrap2">
+                            <div id="drawpic_canvas_wrap">
+                                <canvas id="drawpic_canvas" width="1" height="1"></canvas>
+                            </div>
+                        </div>
+                    <div>
+                        <button onclick="drawpic_hidebtn_onClick()">取消</button>
+                        <button onclick="drawpic_initbtn_onClick()" class="init-btn">重置</button>
+                        <button onclick="drawpic_yesbtn_onClick()">确定</button>
+                    </div>
+                    <canvas id="buffer_canvas" style="display: none;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="warning-wrap">
+            <ul class="setDataList">
+                <li>
+                    <div class="warning">
+                        <span>
+                            <b>免责声明: 页面仅供学习交流，<br />请勿用于其他用途，<br />否则后果作者概不负责！</b>
+                        </span>
+                    </div>
+                    <div class="explanation">
+                        <span>1. 修改"数据设置"部分的输入框中的内容即可更改截图中出现的各项数值.</span>
+                        <br />
+                        <span>2. 点击"保存图片"即可自动生成截图并保存到本地.</span>
+                        <br />
+                        <br />
+                        <span>keep运动截图生成&ensp;v2.41.6&ensp;(6395c902)</span>
+                        <br />
+                        <br />
+                        <span>再次尝试修改了"下载图片"部分的代码, 加了两个按钮.</span>
+                        <br />
+                        <span>如果还是不能下载的话就手动截个图吧, 反正效果差不多 (大概</span>
+                        <br />
+                        <br />
+                        <span>本项目仓库地址: <a href="https://gitee.com/fyhb/keep" target="_blank">https://gitee.com/fyhb/keep</a>.</span>
+                        <br />
+                        <span>※本项目修改自<a href="https://gitee.com/jimaske/njupt-keep" target="_blank">南邮keep跑步打卡截图修改</a>.</span>
+                        <br />
+                        <span>原作者: 四脚兽起飞(<a href="https://gitee.com/jimaske" target="_blank">@jimaske</a>).</span>
+                        <br />
+                        <span>由寒冰(<a href="https://gitee.com/fyhb" target="_blank">@fyhb</a>)修改并发布.(修改内容详见<a href="https://gitee.com/fyhb/keep/blob/master/README.md" target="_blank">README.md</a>)</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="./html2canvas.min.js"></script>
+    <script type="text/javascript">
+        var miles, speeds, username, keep_title, date_year, date_month, date_day, time_hour, time_min, temperature, humidity, savePic_width;
+        var bgSRC = "", ptSRC = "";
+        var display_guijiSelect_id;
+        var default_bgSRC = [];
+        var use_default_bg = true;
+
+        var canvas, ctx, drawdown, convasData, current_img_width, current_img_height, draw_suofang, buffer_canvas;
+        var bs_range_min, bs_range_max;
+        var bs, bs_prob, is_bs, bs_max, bs_range, bs_now, bs_start_x, bs_start_y, bs_end_x, bs_end_y, bs_pres_x, bs_pres_y, bs_pres_color;
+        var draw_start_x, draw_start_y, draw_end_x, draw_end_y;
+
+        var empty_bg_src = "images/empty_bg.png" + "?_=" + new Date().getTime();
+        var gui_img_src = "images/1.png" + "?_=" + new Date().getTime();
+        var default_portrait_scr = "images/default_portrait.png" + "?_=" + new Date().getTime();
+        var start_sign_src = "images/start.png" + "?_=" + new Date().getTime();
+        var end_sign_src = "images/end.png" + "?_=" + new Date().getTime();
+
+        var frameWidth = 300;
+        var frameHeight = 600;
+
+        var bgWidth = 360;
+        var bgHeight = 719;
+
+        let ptWidth = 40;
+        let ptHeight = 40;
+
+        function fract(num) {
+            return num - Math.trunc(num);
+        }
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + String(i);
+                return i;
+                }
+            return String(i);
+            }
+        
+        //将输入框的输入内容存储到对应的变量中
+        function setData() {
+            username = document.getElementById("inpt_username").value;
+            keep_title = document.getElementById("inpt_keep_title").value;
+            miles = parseFloat(document.getElementById("inpt_miles").value);
+            speeds = parseFloat(document.getElementById("inpt_speeds").value);
+            date_year = parseInt(document.getElementById("inpt_year").value);
+            date_month = parseInt(document.getElementById("inpt_month").value);
+            date_day = parseInt(document.getElementById("inpt_day").value);
+            time_hour = parseInt(document.getElementById("inpt_hour").value);
+            time_min = parseInt(document.getElementById("inpt_min").value);
+            temperature = parseInt(document.getElementById("inpt_temperature").value);
+            humidity = parseInt(document.getElementById("inpt_humidity").value);
+            bs_prob = parseFloat(document.getElementById("inpt_bs_prob").value);
+            bs_range_min = parseInt(document.getElementById("inpt_bs_range_min").value);
+            bs_range_max = parseInt(document.getElementById("inpt_bs_range_max").value);
+            savePic_width = parseInt(document.getElementById("inpt_savePic_width").value);
+            rander();
+        }
+
+        //初始化输入框, 将变量的内容放到输入框中
+        function initInputData() {
+            document.getElementById("inpt_username").value = username;
+            document.getElementById("inpt_keep_title").value = keep_title;
+            document.getElementById("inpt_miles").value = miles;
+            document.getElementById("inpt_speeds").value = speeds;
+            document.getElementById("inpt_year").value = date_year;
+            document.getElementById("inpt_month").value = date_month;
+            document.getElementById("inpt_day").value = date_day;
+            document.getElementById("inpt_hour").value = time_hour;
+            document.getElementById("inpt_min").value = time_min;
+            document.getElementById("inpt_temperature").value = temperature;
+            document.getElementById("inpt_humidity").value = humidity;
+            document.getElementById("inpt_bs_prob").value = bs_prob;
+            document.getElementById("inpt_bs_range_min").value = bs_range_min;
+            document.getElementById("inpt_bs_range_max").value = bs_range_max;
+            document.getElementById("inpt_savePic_width").value = savePic_width;
+            document.getElementById("gui-img").src = gui_img_src;
+            document.getElementById("portrait").src = default_portrait_scr;
+            let bgimg_select = document.getElementById("default_bgImgSelect");
+            for (let i = 0; i < bgimg_select.options.length; i ++) {
+                let guijiSelect = document.getElementById(bgimg_select.options[i].value);
+                for (let j = 0; j < guijiSelect.options.length; j ++) {
+                    guijiSelect.options[j].value = '[\"' + String(eval(guijiSelect.options[j].value)[0] + "?_=" + new Date().getTime()) + '\", \"' + String(eval(guijiSelect.options[j].value)[1] + "?_=" + new Date().getTime()) + '\"]';
+                }
+            }
+            let weather_select = document.getElementById("weather_Select");
+            for (let i = 0; i < weather_select.options.length; i ++) {
+                weather_select.options[i].value = weather_select.options[i].value + "?_=" + new Date().getTime();
+            }
+        }
+
+        //渲染, 将输入的内容放到图片的对应位置
+        function rander() {
+            let miles_int = Math.floor(miles);
+            let miles_dec = Math.round((miles - miles_int) * 100);
+            let speeds_int = Math.floor(speeds);
+            let speeds_dec = Math.round((speeds - speeds_int) * 100);
+            let times = (speeds_dec / 60 + speeds_int) * miles;
+            let timeInc = Math.trunc(times);
+            let cost_hour = Math.floor(timeInc / 60);
+            let cost_min = timeInc % 60;
+            let cost_sec = Math.round((times - timeInc) * 60);
+            let calorie = Math.round(69 * miles * 1.036);
+            document.getElementById("mile").innerHTML = String(miles_int) + "." + String(addZero(miles_dec));
+            document.getElementById("date").innerHTML = String(date_year) + "/" + addZero(date_month) + "/" + addZero(date_day);
+            document.getElementById("time").innerHTML = addZero(time_hour) + ":" + addZero(time_min);
+            document.getElementById("temperature").innerHTML = String(temperature) + "℃";
+            document.getElementById("humidity").innerHTML = String(humidity) + "%";
+            document.getElementById("username").innerHTML = username;
+            document.getElementById("keep-title").innerHTML = "Keep&nbsp;•&nbsp;" + keep_title;
+            
+            document.getElementById("speed").innerHTML = String(addZero(speeds_int)) + "'" + String(addZero(speeds_dec)) + '"';
+            document.getElementById("cost-time").innerHTML = String(addZero(cost_hour)) + ":" + String(addZero(cost_min)) + ":" + String(addZero(cost_sec));
+            document.getElementById("calorie").innerHTML = addZero(calorie);
+        }
+
+        //选择预设图片
+        function default_bgImgSelect_onChange() {
+            if (display_guijiSelect_id) {
+                document.getElementById(display_guijiSelect_id).style.display = "none";
+            }
+            display_guijiSelect_id = document.getElementById("default_bgImgSelect").value;
+            document.getElementById(display_guijiSelect_id).style.display = "inline"
+            default_bgSRC = eval(document.getElementById(display_guijiSelect_id).value);
+            setbgImg(default_bgSRC[0]);
+        }
+        function guijiSelect_onChange() {
+            default_bgSRC = eval(document.getElementById(display_guijiSelect_id).value);
+            setbgImg(default_bgSRC[0]);
+        }
+        //选择天气
+        function weather_Select_onChange() {
+            document.getElementById("weather").src = document.getElementById("weather_Select").value;
+        }
+
+        function dataURLtoBlob(dataurl) {
+            var arr = dataurl.split(',');
+            //注意base64的最后面中括号和引号是不转译的   
+            var _arr = arr[1].substring(0, arr[1].length - 2);
+            var mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(_arr),
+                n = bstr.length,
+                u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], {
+                type: mime
+            });
+        }
+
+        //按下更改背景图片的按钮时调用的方法
+        function inpt_bgimg_onClick() {
+            document.getElementById("inpt_bgimg").click();
+        }
+        //按下更改头像的按钮时调用的方法
+        function inpt_portrait_onClick() {
+            document.getElementById("inpt_portrait").click();
+        }
+        //选择并设置背景图片
+        function bgimg_inpt() {
+            var bgimg_oFReader = new FileReader();
+            bgimg_oFReader.onload = function (event) {
+                var bgimg_osrc = event.target.result;
+                if (bgSRC) {
+                    URL.revokeObjectURL(bgSRC);
+                }
+                bgSRC = URL.createObjectURL(dataURLtoBlob(bgimg_osrc));
+                let IMG = new Image();
+                IMG.src = bgSRC;
+                setbgImg(bgSRC);
+                use_default_bg = false;
+            }
+            var bgimg_ofile = document.getElementById("inpt_bgimg").files[0];
+            bgimg_oFReader.readAsDataURL(bgimg_ofile);
+        }
+        function setbgImg(src) {
+            document.getElementById("bg-img").src = src;
+            document.getElementById("bg-img").onload = function() {
+                getNaturalSize();
+            }
+            let IMG = new Image();
+            IMG.src = src;
+            IMG.onload = function(){
+                getNaturalSize();
+                if(parseInt(IMG.width) / parseInt(IMG.height) > 0.5010) {
+                    document.getElementById("bg-img").style.height = String(bgHeight) + "px";
+                    document.getElementById("bg-img").style.width = String(parseInt(IMG.width) * bgHeight / parseInt(IMG.height)) + "px";
+                } else {
+                    document.getElementById("bg-img").style.height = String(parseInt(IMG.height) * bgWidth / parseInt(IMG.width)) + "px";
+                    document.getElementById("bg-img").style.width = String(bgWidth) + "px";
+                }
+            }
+        }
+
+        //选择并设置头像
+        function portrait_inpt() {
+            var portrait_oFReader = new FileReader();
+            portrait_oFReader.onload = function (event) {
+                var portrait_osrc = event.target.result;
+                if (ptSRC) {
+                    URL.revokeObjectURL(ptSRC)
+                }
+                ptSRC = URL.createObjectURL(dataURLtoBlob(portrait_osrc));
+                document.getElementById("portrait").src = ptSRC;
+                let IMG = new Image();
+                IMG.src = ptSRC;
+                IMG.onload = function() {
+                    if(parseInt(IMG.width) / parseInt(IMG.height) > 1){
+                        document.getElementById("portrait").style.height = String(ptHeight) + "px";
+                        document.getElementById("portrait").style.width = String(parseInt(IMG.width) * ptHeight / parseInt(IMG.height)) + "px";
+                    }else{
+                        document.getElementById("portrait").style.height = String(parseInt(IMG.height) * ptWidth / parseInt(IMG.width)) + "px";
+                        document.getElementById("portrait").style.width = String(ptWidth) + "px";
+                    }
+                }
+            }
+            var portrait_ofile = document.getElementById("inpt_portrait").files[0];
+            portrait_oFReader.readAsDataURL(portrait_ofile);
+        }
+        //恢复默认背景图片
+        function init_bgimg() {
+            setbgImg(default_bgSRC[0]);
+            use_default_bg = true;
+        }
+        //恢复默认头像
+        function init_portrait() {
+            document.getElementById("portrait").style.height = ptHeight;
+            document.getElementById("portrait").style.width = ptHeight;
+            document.getElementById("portrait").src = default_portrait_scr;
+        }
+
+        /*----- 以下为[绘制自定义轨迹]用到的方法 -----*/
+        function inpt_drawbtn_onClick() {
+            if(current_img_width / current_img_height > 0.5010) {
+                draw_suofang = current_img_height / frameHeight;
+                document.getElementById("drawpic_canvas_wrap").innerHTML = '<canvas id="drawpic_canvas" width="' + String(current_img_width) + '" height="' + String(current_img_height) + '" style="width: ' + String(Math.floor(current_img_width * (frameHeight / current_img_height))) + 'px; height: ' + String(frameHeight) + 'px;"></canvas>';
+            } else {
+                draw_suofang = current_img_width / frameWidth;
+                document.getElementById("drawpic_canvas_wrap").innerHTML = '<canvas id="drawpic_canvas" width="' + String(current_img_width) + '" height="' + String(current_img_height) + '" style="width: ' + String(frameWidth) + 'px; height: ' + String(Math.floor(current_img_height * (frameWidth / current_img_width))) + 'px;"></canvas>';
+            }
+            document.getElementById("drawpic_overlay").style.display = "flex";
+            document.getElementById("body").style.overflow = "hidden";
+            document.getElementById("body").style.height = "100%";
+            document.body.addEventListener('touchmove', self.welcomeShowedListener, false);
+            start_draw();
+        }
+        function inpt_colorchange_checkbox_onchange() {
+            bs = document.getElementById("inpt_colorchange_checkbox").checked;
+            if (bs) {
+                document.getElementById("bs_prop_inpt_wrap").style.display = "list-item";
+                document.getElementById("inpt_bs_range_wrap").style.display = "list-item";
+            } else {
+                document.getElementById("bs_prop_inpt_wrap").style.display = "none";
+                document.getElementById("inpt_bs_range_wrap").style.display = "none";
+            }
+        }
+        function start_draw() {
+            if (bs) {
+                handlePointerDown = (e) => {
+                    ctx.beginPath();
+                    ctx.lineJoin = "round";
+                    ctx.lineCap = "round";
+                    ctx.lineWidth = String(Math.floor(5 * draw_suofang));
+                    bs_pres_color = new Array(38, 201, 154);
+                    if (drawdown == false) {
+                        draw_start_x = e.offsetX * draw_suofang;
+                        draw_start_y = e.offsetY * draw_suofang;
+                        ctx.strokeStyle = "rgb(38, 201, 154)".toString();
+                    }
+                    drawdown = true;
+                    bs_pres_x = e.offsetX * draw_suofang;
+                    bs_pres_y = e.offsetY * draw_suofang;
+                    ctx.moveTo(e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                }
+                handlePointerMove = (e) => {
+                    if (drawdown) {
+                        if (is_bs) {
+                            if (bs_now >= bs_range) {
+                                is_bs = false;
+                                ctx.beginPath();
+                                ctx.lineJoin = "round";
+                                ctx.lineCap = "round";
+                                ctx.lineWidth = String(Math.floor(5 * draw_suofang));
+                                ctx.moveTo(bs_pres_x, bs_pres_y);
+                                ctx.lineTo(e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                                var gradient = ctx.createLinearGradient(bs_pres_x, bs_pres_y, e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                                gradient.addColorStop(0, "rgb(" + String(bs_pres_color[0]) + "," + String(bs_pres_color[1]) + " ," + String(bs_pres_color[2]) + " )");
+                                gradient.addColorStop(1, "rgb(38, 201, 154)");
+                                ctx.strokeStyle = gradient;
+                                ctx.stroke();
+                                bs_pres_color = new Array(38, 201, 154);
+                            }
+                        }
+                        if (Math.random() < bs_prob && is_bs == false) {
+                            is_bs = true;
+                            rg = 2 * Math.random() - 1;
+                            if (rg > 0) {
+                                bs_max = new Array(Math.floor(193 * Math.pow(Math.abs(rg), 0.5)), Math.floor(-110 * Math.pow(Math.abs(rg), 0.5)), Math.floor(-66 * Math.pow(Math.abs(rg), 0.5)));
+                            } else {
+                                bs_max = new Array(Math.floor(27 * Math.pow(Math.abs(rg), 0.5)), Math.floor(16 * Math.pow(Math.abs(rg), 0.5)), Math.floor(94 * Math.pow(Math.abs(rg), 0.5)));
+                            }
+                            bs_range = bs_range_min + Math.floor((bs_range_max - bs_range_min) * Math.random());
+                            bs_now = 0;
+                        }
+                        if (is_bs) {
+                            ctx.beginPath();
+                            ctx.lineJoin = "round";
+                            ctx.lineCap = "round";
+                            ctx.lineWidth = String(Math.floor(5 * draw_suofang));
+                            ctx.moveTo(bs_pres_x, bs_pres_y);
+                            var bs_now_color = new Array(Math.floor(38 + (4 * bs_max[0] * bs_now / bs_range) * (1 - bs_now / bs_range)), Math.floor(201 + (4 * bs_max[1] * bs_now / bs_range) * (1 - bs_now / bs_range)), Math.floor(154 + (4 * bs_max[2] * bs_now / bs_range) * (1 - bs_now / bs_range)))
+                            var gradient = ctx.createLinearGradient(bs_pres_x, bs_pres_y, e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                            gradient.addColorStop(0, "rgb(" + String(bs_pres_color[0]) + "," + String(bs_pres_color[1]) + " ," + String(bs_pres_color[2]) + " )");
+                            gradient.addColorStop(1, "rgb(" + String(bs_now_color[0]) + "," + String(bs_now_color[1]) + " ," + String(bs_now_color[2]) + " )");
+                            ctx.strokeStyle = gradient;
+                            ctx.lineTo(e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                            ctx.stroke();
+                            bs_pres_color = bs_now_color;
+                            bs_now += 1
+                        } else {
+                            ctx.lineTo(e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                            ctx.strokeStyle = "rgb(38, 201, 154)".toString();
+                            ctx.stroke();
+                        }
+                        bs_pres_x = e.offsetX * draw_suofang;
+                        bs_pres_y = e.offsetY * draw_suofang;
+                    }
+                }
+                handlePointerUp = (e) => {
+                    draw_end_x = e.offsetX * draw_suofang;
+                    draw_end_y = e.offsetY * draw_suofang;
+                    var startIMG = new Image();
+                    var endIMG = new Image();
+                    startIMG.src = start_sign_src;
+                    endIMG.src = end_sign_src;
+                    startIMG.onload = function () {
+                        ctx.drawImage(startIMG, Math.floor(draw_start_x - 15 * draw_suofang), Math.floor(draw_start_y - 22 * draw_suofang), Math.floor(30 * draw_suofang), Math.floor(30 * draw_suofang));
+                    }
+                    endIMG.onload = function () {
+                        ctx.drawImage(endIMG, Math.floor(draw_end_x - 15 * draw_suofang), Math.floor(draw_end_y - 22 * draw_suofang), Math.floor(30 * draw_suofang), Math.floor(30 * draw_suofang));
+                    }
+                    convasData = ctx.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+                    drawdown = false;
+                    restorePointer();
+                }
+            } else {
+                handlePointerDown = (e) => {
+                    ctx.beginPath();
+                    if (drawdown == false) {
+                        draw_start_x = e.offsetX * draw_suofang;
+                        draw_start_y = e.offsetY * draw_suofang;
+                    }
+                    drawdown = true;
+                    ctx.moveTo(e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                }
+                handlePointerMove = (e) => {
+                    if (drawdown) {
+                        ctx.lineTo(e.offsetX * draw_suofang, e.offsetY * draw_suofang);
+                        ctx.strokeStyle = "rgb(38, 201, 154)".toString();
+                        ctx.lineJoin = "round";
+                        ctx.lineCap = "round";
+                        ctx.lineWidth = String(parseInt(5 * draw_suofang));
+                        ctx.stroke();
+                    }
+                }
+                handlePointerUp = (e) => {
+                    draw_end_x = e.offsetX * draw_suofang;
+                    draw_end_y = e.offsetY * draw_suofang;
+                    var startIMG = new Image();
+                    var endIMG = new Image();
+                    startIMG.src = start_sign_src;
+                    endIMG.src = end_sign_src;
+                    startIMG.onload = function () {
+                        ctx.drawImage(startIMG, parseInt(draw_start_x - 15 * draw_suofang), parseInt(draw_start_y - 22 * draw_suofang), parseInt(30 * draw_suofang), parseInt(30 * draw_suofang));
+                    }
+                    endIMG.onload = function () {
+                        ctx.drawImage(endIMG, parseInt(draw_end_x - 15 * draw_suofang), parseInt(draw_end_y - 22 * draw_suofang), parseInt(30 * draw_suofang), parseInt(30 * draw_suofang));
+                    }
+                    convasData = ctx.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+                    drawdown = false;
+                    restorePointer();
+                }
+            }
+            canvas = document.getElementById('drawpic_canvas');
+            ctx = canvas.getContext('2d');
+            var bgIMG = new Image();
+            if (use_default_bg) {
+                bgIMG.src = default_bgSRC[1];
+            } else {
+                bgIMG.src = bgSRC;
+            }
+            bgIMG.onload = function () {
+                ctx.drawImage(bgIMG, 0, 0, current_img_width, current_img_height);
+                drawdown = false;
+                is_bs = false;
+                convasData = null;
+                canvas.addEventListener('pointerdown', handlePointerDown);
+                canvas.addEventListener('pointermove', handlePointerMove);
+                canvas.addEventListener('pointerup', handlePointerUp);
+                }
+        }
+
+        //这三个方法的具体内容, 取决于是否处在"路径变色"模式
+        //所以这里先占个位
+        var handlePointerDown, handlePointerMove, handlePointerUp;
+        
+        function restorePointer() {
+            canvas.removeEventListener('pointerdown', handlePointerDown);
+            canvas.removeEventListener('pointermove', handlePointerMove);
+            canvas.removeEventListener('pointerup', handlePointerUp);
+        }
+        //取消按钮
+        function drawpic_hidebtn_onClick() {
+            restorePointer();
+            document.getElementById("body").style.overflow = "";
+            document.getElementById("body").style.height = "";
+            document.body.removeEventListener('touchmove', this.welcomeShowedListener, false);
+            document.getElementById("drawpic_overlay").style.display = "none";
+        }
+        //重置按钮
+        function drawpic_initbtn_onClick() {
+            ctx.clearRect(0, 0, current_img_width, current_img_height);
+            start_draw();
+        }
+        //确定按钮
+        function drawpic_yesbtn_onClick() {
+            document.getElementById("body").style.overflow = "";
+            document.getElementById("body").style.height = "";
+            document.body.removeEventListener('touchmove', this.welcomeShowedListener, false);
+            document.getElementById("bg-img").src = canvas.toDataURL();
+            document.getElementById("drawpic_overlay").style.display = "none";
+        }
+        //获取当前使用的背景图片的尺寸
+        function getNaturalSize () {
+            img = document.getElementById("bg-img")
+            current_img_width = img.naturalWidth;
+            current_img_height = img.naturalHeight;
+        }
+        /*----- 以上为[绘制自定义轨迹]用到的方法 -----*/
+
+        //下载截图
+        function Download(func=Download1) {
+            let ele = document.getElementById("new-Img");
+            buffer_canvas = document.getElementById("buffer_canvas");
+            buffer_canvas.width = savePic_width;
+            buffer_canvas.height = Math.floor(savePic_width * 2157 / 1080);
+            let scale = savePic_width / document.getElementById("new-Img").getBoundingClientRect().width;
+            html2canvas(ele, {
+                canvas: buffer_canvas,
+                useCORS: true,
+                logging: false,
+                height: buffer_canvas.height,
+                width: buffer_canvas.width,
+                scale: scale,
+            }).then(func);
+        }
+        // 使用a元素
+        function Download1(buffer_canvas) {
+            let dataurl = buffer_canvas.toDataURL('image/png');
+            let donwLink = document.createElement('a');
+            donwLink.Download = "keep" + (date_month) + "月" + (date_day) + "日" + "跑步打卡.png";
+            donwLink.download = "keep" + (date_month) + "月" + (date_day) + "日" + "跑步打卡.png";
+            donwLink.href = dataurl;
+            donwLink.style = 'display: none';
+            donwLink.dataset.downloadurl = ["image/png", donwLink.download, donwLink.href].join(':');
+            document.body.appendChild(donwLink);
+            donwLink.click();
+            document.body.removeChild(donwLink);
+        }
+        // 新打开一个窗口显示图片
+        function Download2(buffer_canvas) {
+            let dataurl = buffer_canvas.toDataURL('image/png');
+            window.open('about:blank', 'image').document.write("<img src='" + dataurl + "' alt='from canvas'/>");
+        }
+        // ObjectURL
+        function Download3(buffer_canvas) {
+            let dataurl = buffer_canvas.toDataURL('image/png');
+            let picURL = URL.createObjectURL(dataURLtoBlob(dataurl));
+            let donwLink = document.createElement('a');
+            donwLink.Download = "keep" + (date_month) + "月" + (date_day) + "日" + "跑步打卡.png";
+            donwLink.download = "keep" + (date_month) + "月" + (date_day) + "日" + "跑步打卡.png";
+            donwLink.href = picURL;
+            donwLink.style = 'display: none';
+            donwLink.dataset.downloadurl = ["image/png", donwLink.download, donwLink.href].join(':');
+            document.body.appendChild(donwLink);
+            donwLink.click();
+            document.body.removeChild(donwLink);
+            URL.revokeObjectURL(picURL);
+        }
+        // window.location.href
+        function Download4(buffer_canvas) {
+            window.location.href = buffer_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        }
+
+
+
+        //初始化变量
+        window.onload = function() {
+            miles = Math.floor((2 + Math.random() * 3) * 100) / 100;
+            speeds = Math.floor((4 + Math.random() * 6) * 100) / 100;
+            let datetime_now = new Date();
+            date_year = datetime_now.getFullYear();
+            date_month = datetime_now.getMonth() + 1;
+            date_day = datetime_now.getDate();
+            time_hour = datetime_now.getHours();
+            time_min = datetime_now.getMinutes();
+            username = "用户名";
+            keep_title = "户外跑步";
+            humidity = 23;
+            temperature = 12;
+            bs_prob = 0.2;
+            bs_range_min = 15;
+            bs_range_max = 40;
+            savePic_width = 1080;
+
+            initInputData();
+
+            default_bgImgSelect_onChange();
+            weather_Select_onChange();
+            inpt_colorchange_checkbox_onchange();
+
+            rander();
+        }
+    </script>
+</body>
+</html>
