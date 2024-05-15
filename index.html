@@ -508,7 +508,7 @@
                         </div>
                     <div>
                         <button onclick="drawpic_hidebtn_onClick()">取消</button>
-                        <button onclick="drawpic_initbtn_onClick()" class="init-btn">重置</button>
+                        <button onclick="drawpic_initbtn_onClick()" class="init-btn", id="drawcanvas_reset_btn">重置</button>
                         <button onclick="drawpic_yesbtn_onClick()">确定</button>
                     </div>
                     <canvas id="buffer_canvas" style="display: none;"></canvas>
@@ -529,7 +529,7 @@
                         <span>2. 点击"保存图片"即可自动生成截图并保存到本地.</span>
                         <br />
                         <br />
-                        <span>keep运动截图生成&ensp;v24.05.15.01</span>
+                        <span>keep运动截图生成&ensp;v24.05.15.02</span>
                         <br />
                         <br />
                         <span>本项目仓库地址: <a href="https://github.com/fy-hb/keep/" target="_blank">github.com/fy-hb/keep/</a>.</span>
@@ -955,6 +955,7 @@
             canvas.removeEventListener('pointerdown', handlePointerDown);
             canvas.removeEventListener('pointermove', handlePointerMove);
             canvas.removeEventListener('pointerup', handlePointerUp);
+            document.getElementById("drawcanvas_reset_btn").className = "";
         }
         //取消按钮
         function drawpic_hidebtn_onClick() {
@@ -968,6 +969,7 @@
         function drawpic_initbtn_onClick() {
             ctx.clearRect(0, 0, current_img_width, current_img_height);
             start_draw();
+            document.getElementById("drawcanvas_reset_btn").className = "init-btn";
         }
         //确定按钮
         function drawpic_yesbtn_onClick() {
