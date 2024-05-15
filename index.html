@@ -581,24 +581,24 @@
                 return i;
                 }
             return String(i);
-            }
+        }
         
         //将输入框的输入内容存储到对应的变量中
         function setData() {
-            username = document.getElementById("inpt_username").value;
-            keep_title = document.getElementById("inpt_keep_title").value;
-            miles = parseFloat(document.getElementById("inpt_miles").value);
-            speeds = parseFloat(document.getElementById("inpt_speeds").value);
-            date_year = parseInt(document.getElementById("inpt_year").value);
-            date_month = parseInt(document.getElementById("inpt_month").value);
-            date_day = parseInt(document.getElementById("inpt_day").value);
-            time_hour = parseInt(document.getElementById("inpt_hour").value);
-            time_min = parseInt(document.getElementById("inpt_min").value);
-            temperature = parseInt(document.getElementById("inpt_temperature").value);
-            humidity = parseInt(document.getElementById("inpt_humidity").value);
-            bs_prob = parseFloat(document.getElementById("inpt_bs_prob").value);
-            bs_range_min = parseInt(document.getElementById("inpt_bs_range_min").value);
-            bs_range_max = parseInt(document.getElementById("inpt_bs_range_max").value);
+            username      = document.getElementById("inpt_username").value;
+            keep_title    = document.getElementById("inpt_keep_title").value;
+            miles         = parseFloat(document.getElementById("inpt_miles").value);
+            speeds        = parseFloat(document.getElementById("inpt_speeds").value);
+            date_year     = parseInt(document.getElementById("inpt_year").value);
+            date_month    = parseInt(document.getElementById("inpt_month").value);
+            date_day      = parseInt(document.getElementById("inpt_day").value);
+            time_hour     = parseInt(document.getElementById("inpt_hour").value);
+            time_min      = parseInt(document.getElementById("inpt_min").value);
+            temperature   = parseInt(document.getElementById("inpt_temperature").value);
+            humidity      = parseInt(document.getElementById("inpt_humidity").value);
+            bs_prob       = parseFloat(document.getElementById("inpt_bs_prob").value);
+            bs_range_min  = parseInt(document.getElementById("inpt_bs_range_min").value);
+            bs_range_max  = parseInt(document.getElementById("inpt_bs_range_max").value);
             savePic_width = parseInt(document.getElementById("inpt_savePic_width").value);
             rander();
         }
@@ -944,7 +944,7 @@
                 canvas.addEventListener('pointerdown', handlePointerDown);
                 canvas.addEventListener('pointermove', handlePointerMove);
                 canvas.addEventListener('pointerup', handlePointerUp);
-                }
+            }
         }
 
         //这三个方法的具体内容, 取决于是否处在"路径变色"模式
@@ -1039,7 +1039,7 @@
             window.location.href = buffer_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
         }
 
-        //初始化变量
+        //初始化
         window.onload = function() {
             miles = Math.floor((2 + Math.random() * 3) * 100) / 100;
             speeds = Math.floor((4 + Math.random() * 6) * 100) / 100;
