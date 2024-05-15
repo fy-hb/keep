@@ -6,11 +6,10 @@
 #### 说明
 
 1.  本项目修改自[南邮keep跑步打卡截图修改](https://gitee.com/jimaske/njupt-keep).
-2.  原作者: 四脚兽起飞([@jimaske](https://gitee.com/jimaske)); 由"寒冰"([@fyhb](https://gitee.com/fyhb))修改并发布.(具体修改内容详见下文)
-3.  本项目的静态网页->[https://fyhb.gitee.io/keep](https://fyhb.gitee.io/keep)
+2.  原作者: 四脚兽起飞([@jimaske](https://gitee.com/jimaske)); 由"寒冰"([@fyhb](https://github.com/fy-hb))修改并发布.(具体修改内容详见下文)
+3.  本项目的静态网页->[https://fy-hb.github.io/keep/](https://fy-hb.github.io/keep/)
 
-keep运动截图生成 v2.41.6
-更新于2022-12-11
+keep运动截图生成 v24.05.15.01
 
 #### 相比于原项目的改动
 
