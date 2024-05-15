@@ -9,7 +9,7 @@
 2.  原作者: 四脚兽起飞([@jimaske](https://gitee.com/jimaske)); 由"寒冰"([@fyhb](https://github.com/fy-hb))修改并发布.(具体修改内容详见下文)
 3.  本项目的静态网页->[https://fy-hb.github.io/keep/](https://fy-hb.github.io/keep/)
 
-keep运动截图生成 v24.05.15.02
+keep运动截图生成 v24.05.15.03
 
 #### 相比于原项目的改动
 

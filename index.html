@@ -383,7 +383,7 @@
                     <label>头像：</label>
                     <button onclick="inpt_portrait_onClick()" class="inpt-btn">选择图片</button>
                     <input style="display:none;" type="file" accept="image/*" id="inpt_portrait" onchange="portrait_inpt()" />
-                    <button onclick="init_portrait()" class="init-btn">恢复默认</button>
+                    <button onclick="init_portrait()" class="init-btn", id="setpt_reset_btn">恢复默认</button>
                 </li>
                 <li>
                     <label>标题：</label>
@@ -441,7 +441,7 @@
                     <label>自定义背景：</label>
                     <button onclick="inpt_bgimg_onClick()">选择图片</button>
                     <input style="display:none;" type="file" accept="image/*" id="inpt_bgimg" onchange="bgimg_inpt()" />
-                    <button onclick="init_bgimg()" class="init-btn">恢复默认</button>
+                    <button onclick="init_bgimg()" class="init-btn", id="setbgimg_reset_btn">恢复默认</button>
                 </li>
                 <li>
                     <label>预设轨迹：</label>
@@ -529,7 +529,7 @@
                         <span>2. 点击"保存图片"即可自动生成截图并保存到本地.</span>
                         <br />
                         <br />
-                        <span>keep运动截图生成&ensp;v24.05.15.02</span>
+                        <span>keep运动截图生成&ensp;v24.05.15.03</span>
                         <br />
                         <br />
                         <span>本项目仓库地址: <a href="https://github.com/fy-hb/keep/" target="_blank">github.com/fy-hb/keep/</a>.</span>
@@ -716,6 +716,7 @@
                 IMG.src = bgSRC;
                 setbgImg(bgSRC);
                 use_default_bg = false;
+                document.getElementById("setbgimg_reset_btn").className = "";
             }
             var bgimg_ofile = document.getElementById("inpt_bgimg").files[0];
             bgimg_oFReader.readAsDataURL(bgimg_ofile);
@@ -759,6 +760,7 @@
                         document.getElementById("portrait").style.height = String(parseInt(IMG.height) * ptWidth / parseInt(IMG.width)) + "px";
                         document.getElementById("portrait").style.width = String(ptWidth) + "px";
                     }
+                    document.getElementById("setpt_reset_btn").className = "";
                 }
             }
             var portrait_ofile = document.getElementById("inpt_portrait").files[0];
@@ -768,12 +770,14 @@
         function init_bgimg() {
             setbgImg(default_bgSRC[0]);
             use_default_bg = true;
+            document.getElementById("setbgimg_reset_btn").className = "init-btn";
         }
         //恢复默认头像
         function init_portrait() {
             document.getElementById("portrait").style.height = ptHeight;
             document.getElementById("portrait").style.width = ptHeight;
             document.getElementById("portrait").src = default_portrait_scr;
+            document.getElementById("setpt_reset_btn").className = "init-btn";
         }
 
         /*----- 以下为[绘制自定义轨迹]用到的方法 -----*/
