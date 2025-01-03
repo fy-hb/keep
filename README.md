@@ -1,5 +1,15 @@
 # keep
 
+#### 关于本项目的维护
+
+本项目约等于已停止维护。
+
+建议访问 [@joytion](https://gitee.com/joytion) 的后续修改版本。
+
+仓库地址：[https://gitee.com/joytion/keep/](https://gitee.com/joytion/keep/)
+
+在线网页：[https://tool.joytion.cn/keep/](https://tool.joytion.cn/keep/)
+
 #### 介绍
 生成高仿keep运动截图, 并作为图片保存到本地.
 
